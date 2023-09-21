@@ -1,6 +1,7 @@
 
 # Importamos vistas genericas:
-from django.views.generic import TemplateView, CreateView, ListView
+from typing import Any
+from django.views.generic import TemplateView, CreateView, ListView, FormView
 
 # Importamos los modelos que vamos a usar:
 from django.contrib.auth.models import User
@@ -9,6 +10,7 @@ from e_commerce.models import *
 
 # Formulario de registro:
 from django import forms
+from .forms import ProfileForm
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -373,15 +375,28 @@ class ThanksView(TemplateView):
     template_name = 'e-commerce/thanks.html'
 
 
-class UpdateUserView(TemplateView):
+class UpdateUserView(FormView):
     '''
     Esta vista tiene como objetivo, proporcionar un formulario de actualización de los campos de usuario.
     '''
+    
     template_name = 'e-commerce/update-user.html'
 
-    def get_context_data(self, **kwargs):
-        # TODO: Realizar la lógica de actualización de los datos de usuario.
-        return super().get_context_data(**kwargs)
+    def get(self, request):
+        form = ProfileForm()
+        return render(request, 'e-commerce/update-user.html', {'form': form})
+    
+    def post(self, request):
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            print(form)
+            profile = form.save()
+            return redirect('user-profile', {'form': form})
+        else:
+            return render(request, 'e-commerce/update-user.html', {'form': form})
+
+
+         
 
 class UserView(TemplateView):
     '''Vista con el detalle de los datos personales del usuario'''
@@ -407,3 +422,12 @@ class BootstrapSignupView(TemplateView):
     Vista para Template de registro de usuario con estilo de bootstrap.
     '''
     template_name = 'e-commerce/bootstrap-signup.html'
+
+
+class UserProfileView(TemplateView):
+
+    template_name = 'e-commerce/user-profile.html'
+
+    def get_context_data(self, **kwargs):
+
+        return super().get_context_data(**kwargs)

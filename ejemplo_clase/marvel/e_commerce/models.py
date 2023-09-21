@@ -1,14 +1,28 @@
 from django.db import models
-
+#from django.conf import settings
 # NOTE: Para poder utilizar el modelo "user" que viene por defecto en Django,
 # Debemos importarlo previamente:
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
+class Profile(models.Model):
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    pais = models.CharField(max_length=50, blank=True, null=True)
+    provincia = models.CharField(max_length=50, blank=True, null=True)
+    ciudad = models.CharField(max_length=50, blank=True, null=True)
+    codigo_postal = models.CharField('Código Postal', max_length=50, blank=True, null=True)
+    telefono_contacto = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+          verbose_name = 'Perfil'
+          verbose_name_plural = 'Perfiles'
+
+
 class Comic(models.Model):
     '''
-    Esta clase hereda de Django models.Model y crea una tabla llamada
+    Esta clase hereda de Django models.Model y crea una tabla llamadals
     e_commerce_comic. Las columnas toman el nombre especificado de cada objeto.
     '''
     id = models.BigAutoField(db_column='ID', primary_key=True)

@@ -62,6 +62,7 @@ urlpatterns = [
      path('index', IndexView.as_view(), name='index'),
      path('thanks', ThanksView.as_view(), name='thanks'),
      path('update-user', UpdateUserView.as_view(), name= 'update'),
+     path('user-profile', login_required(UserProfileView.as_view()), name= 'user-profile'),
      path('user', login_required(UserView.as_view()), name= 'user'),
      path('wish', login_required(WishView.as_view()), name='wish'),
      path('cart', login_required(CartView.as_view()), name='cart'),
