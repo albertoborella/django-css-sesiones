@@ -3,5 +3,12 @@
 {% block title %}Actualización de perfil{% endblock %}
 
 {% block content %}
-{{user.username}}
+<div>
+   <h1>Agregar datos al Perfil de Usuario</h1>
+   <form action="{% url 'update-user' %}" method="post">{% csrf_token %}
+      {{ form.as_p }}
+   <input type="submit" value="Modificar Perfil">
+  </form>
+    
+</div>
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "e-commerce/base.html" %}
+
+{% block title %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+<div class="row">
+<div style="padding: 40px;">
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Nombre completo:</span>
+    <span style="font-size: 20px; color: blue; margin-left: 20px;">{{user.first_name | upper}} {{user.last_name | upper }}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Username:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.username}}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">E-mail:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.email}}</span><br><br>
+</div>
+<div style="padding: 40px;">
+    <span style="font-size: 20px; color: black; text-decoration: underline;">País:</span>
+    <span style="font-size: 20px; color: blue; margin-left: 20px;">{{user.profile.pais | upper}}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Provincia:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.profile.provincia}}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Ciudad:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.profile.ciudad}}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Codigo Postal:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.profile.codigo_postal}}</span><br>
+    <span style="font-size: 20px; color: black; text-decoration: underline;">Teléfono de Contacto:</span>
+    <span style="font-size: 18px; color: blue; margin-left: 20px;">{{user.profile.telefono_contacto}}</span><br><br>
+
+    <a href="{% url 'update' %}"><button>Modificar Perfil de Usuario</button></a>
+</div>
+</div>
+{% endblock %}
